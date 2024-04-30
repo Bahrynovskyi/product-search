@@ -1,0 +1,53 @@
+.logo {
+  padding: 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: pink;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: white;
+  font-size: 24px;
+  font-weight: 800;
+  position: relative;
+  height: 100px;
+}
+.logo-first_line,
+.logo-second_line {
+  position: absolute;
+  display: block;
+  width: 2px;
+  height: 100%;
+  background-color: white;
+  top: 0;
+  left: 5px;
+}
+.logo-first_line {
+  left: 5px;
+}
+.logo-second_line {
+  left: 10px;
+}
+
+.logo-first-letter {
+  border: 1px solid white;
+  padding: 0 5px;
+  color: pink;
+  background-color: #fff;
+}
+.logo-other-letters {
+  margin-left: 3px;
+}
+
+@media (max-width: 580px) {
+  .logo-first_line,
+  .logo-second_line {
+    display: none;
+  }
+  .logo {
+    padding: 5px;
+    font-size: 18px;
+    height: 60px;
+    border-radius: 0;
+  }
+}

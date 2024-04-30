@@ -1,0 +1,56 @@
+.product-wrapper {
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 5px 10px;
+  width: 250px;
+  height: 400px;
+}
+.product-image {
+  width: 200px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-image img {
+  width: 50px;
+  height: 50px;
+}
+.product-name {
+  width: 80%;
+}
+.product-inf {
+  display: flex;
+  justify-content: space-between;
+}
+.product-price {
+  font-size: 18px;
+  font-weight: bold;
+}
+.product-category {
+  padding: 5px;
+  border-radius: 15px;
+  color: white;
+  background-color: lightgray;
+}
+.procut-btn {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  height: 30px;
+  margin-top: 5px;
+  background-color: #51c878;
+  border: none;
+  border-radius: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+  color: white;
+}
+
+.procut-btn:hover {
+  background-color: #40ff01;
+}

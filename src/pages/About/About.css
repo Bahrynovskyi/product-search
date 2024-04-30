@@ -1,0 +1,358 @@
+.about-wrapper {
+  min-height: 75vh;
+}
+.about-reasons {
+  background-color: #000000;
+  background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 100px;
+}
+
+.about-reasons h2 {
+  font-size: 104px;
+  text-transform: uppercase;
+  color: pink;
+  margin-left: 2vw;
+}
+.about-reasons-list {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  list-style-type: none;
+}
+
+.about-reasons-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 5vw;
+  width: 90vw;
+  font-size: 24px;
+  border: 4px solid white;
+  margin-top: 30px;
+  padding: 20px 30px;
+  transition: 0.5s;
+}
+.about-reasons-list__item span {
+  border: 5px solid white;
+  display: block;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-reasons-list__item:hover span {
+  color: black;
+  border-color: #434343;
+}
+.about-reasons-list__item:hover {
+  color: black;
+  background-color: aliceblue;
+  border: 4px double #000000;
+}
+
+@media (max-width: 1300px) {
+  .about-reasons h2 {
+    font-size: 72px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .about-reasons h2 {
+    font-size: 48px;
+  }
+  .about-reasons-list {
+    margin-top: 10px;
+  }
+  .about-reasons-list__item {
+    padding: 10px;
+    font-size: 16px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 850px) {
+  .about-reasons h2 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 700px) {
+  .about-reasons-list__item span {
+    border: 3px solid white;
+  }
+}
+
+@media (max-width: 550px) {
+  .about-reasons h2 {
+    font-size: 24px;
+  }
+  .about-reasons-list__item span {
+    padding: 10px 15px;
+  }
+  .about-reasons-list__item {
+    font-size: 14px;
+  }
+}
+
+/*-------------------------------------*/
+
+.about-calculator h2 {
+  position: sticky;
+  margin-bottom: 100px;
+  width: 50vw;
+  border: 8px double #161618;
+  border-left: none;
+  font-size: 76px;
+  padding: 10px 40px;
+  color: #161618;
+}
+.about-calculator__cards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50vw;
+  padding: 20px 0;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  gap: 2vw;
+}
+.about-calculator__card {
+  position: relative;
+  cursor: pointer;
+}
+.about-tick-img {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #fff;
+  top: 10%;
+  right: 10%;
+  height: 64px;
+  width: 64px;
+}
+
+.about-calculator p {
+  text-align: center;
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+@media (max-width: 1850px) {
+  .about-calculator h2 {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .about-calculator h2 {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .about-calculator h2 {
+    border-right: none;
+    width: 100vw;
+    text-align: center;
+  }
+}
+
+@media (max-width: 650px) {
+  .about-calculator h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  .about-calculator__cards .about-tick-img {
+    height: 32px;
+    width: 32px;
+  }
+}
+
+@media (max-width: 450px) {
+  .about-calculator h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+}
+
+/*-------------------------------------*/
+
+.about-calculator__discount-types {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5vw;
+}
+
+.about-calculator__discount-type {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 300px;
+  border: 1px solid grey;
+  border-radius: 20px;
+  height: 500px;
+}
+
+.discount-type__gold {
+  background: linear-gradient(to top, #bf953f, #fcf6ba, #b38728, #fbf5b7);
+}
+.discount-type__silver {
+  background: linear-gradient(to top, #ededed, #bdbdbd, #ededed, #bdbdbd);
+}
+.discount-type__bronze {
+  background: linear-gradient(to top, #d09863, #864d26, #d09863, #864d26);
+}
+
+.about-calculator__discount-type h3 {
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 2px 1px 2px grey;
+}
+
+.about-calculator__discount-type__percentage {
+  font-size: 50px;
+  background-color: white;
+  padding: 30px;
+  align-self: flex-end;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.about-calculator__discount-type__percentage span {
+  font-size: 36px;
+  font-weight: bold;
+  color: lightcoral;
+}
+
+@media (max-width: 1200px) {
+  .about-calculator__discount-types {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 700px) {
+  .about-calculator__discount-types {
+    flex-direction: row;
+  }
+  .about-calculator__discount-type {
+    width: 150px;
+    height: 250px;
+  }
+  .about-calculator__discount-type h3 {
+    font-size: 24px;
+  }
+  .about-calculator__discount-types .about-tick-img {
+    height: 32px;
+    width: 32px;
+  }
+}
+
+@media (max-width: 530px) {
+  .about-calculator__discount-types {
+    flex-direction: column;
+  }
+}
+
+/*-------------------------------------*/
+.about-calculator__reckon-price {
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+.about-calculator__reckon-price-amount {
+  display: flex;
+}
+.about-calculator__reckon-price-amount label {
+  font-size: 20px;
+}
+.about-calculator__reckon-price-amount input {
+  padding: 20px 30px;
+  font-size: 20px;
+  color: pink;
+  margin-left: 5px;
+  border: 4px double pink;
+  outline: none;
+}
+.about-calculator__reckon-price-discount {
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+}
+.about-calculator__reckon-price-discount p {
+  padding: 0;
+  margin: 0;
+}
+.about-calculator__reckon-price-discount span {
+  padding: 0;
+  margin: 0;
+  font-size: 40px;
+  color: pink;
+  border: 4px double pink;
+  padding: 10px 20px;
+}
+.about-calculator__reckon-price-total {
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+}
+
+.about-calculator__reckon-price-total p {
+  padding: 0;
+  margin: 0;
+}
+.about-calculator__reckon-price-total span {
+  padding: 0;
+  margin: 0;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  border: 4px double white;
+  background-color: pink;
+  padding: 10px 20px;
+}
+
+@media (max-width: 1500px) {
+  .about-calculator__reckon-price {
+    width: 95vw;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2vh;
+  }
+}
+
+@media (max-width: 550px) {
+  .about-calculator__reckon-price {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .about-calculator__reckon-price-amount,
+  .about-calculator__reckon-price-discount,
+  .about-calculator__reckon-price-total {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-calculator__reckon-price-amount label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
