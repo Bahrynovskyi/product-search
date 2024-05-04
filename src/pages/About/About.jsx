@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import discount_data from "../../data/discount_data";
+import sliderElements from "../../data/sliderElements";
+import SliderElement from "../../components/SliderElement/SliderElement";
 import "./About.css";
 
 const About = () => {
@@ -12,6 +14,24 @@ const About = () => {
   const [purchasePrice, setPurchasePrice] = useState(100);
   const [discount, setDiscount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [slides, setSlides] = useState(sliderElements);
+  const [position, setPosition] = useState(0);
+
+  const slideLeft = () => {
+    if (position <= 0) {
+      setPosition((position) => (position = 0));
+    } else {
+      setPosition((position) => position - 3);
+    }
+  };
+  const slideRight = () => {
+    if (position >= slides.length + 1) {
+      setPosition((position) => (position = slides.length));
+    } else {
+      setPosition((position) => position + 3);
+    }
+  };
+
   const checkTheCard = (id) => {
     if (id.length === 3) {
       setDiscountCard(
@@ -61,6 +81,8 @@ const About = () => {
       (discountInf.discount_bonus * discountInf.discount_percentage).toFixed()
     );
     if (purchasePrice.length > 6) setPurchasePrice(999999);
+    if (purchasePrice[0] === "-" || purchasePrice[0] === "0")
+      setPurchasePrice("");
     setTotalAmount(
       (purchasePrice - (purchasePrice / 100) * discount).toFixed()
     );
@@ -203,7 +225,112 @@ const About = () => {
           )}
         </div>
       </section>
-      <section className="about-description"></section>
+      <section className="about-description">
+        <h2>How to get it?</h2>
+        <div className="about-description__getting about-description__getting-1">
+          <div className="about-description__getting-1-bg-img"></div>
+          <div className="about-description__getting-1-text">
+            <p>
+              The first step towards obtaining your Gold Card is to become a
+              loyal customer at Product-Search. The more you shop, the closer
+              you get to unlocking the exclusive benefits of the Gold Card.
+            </p>
+            <p>
+              Keep an eye out for the qualifying criteria set by Product-Search
+              to attain Gold Card status. This may include factors such as total
+              purchase value, frequency of purchases, or participation in
+              promotional events.
+            </p>
+          </div>
+        </div>
+        <div className="about-description__getting about-description__getting-2">
+          <div className="about-description__getting-2-text">
+            <p>
+              Stay updated on any promotions or offers that Product-Search may
+              have specifically for Gold Card aspirants. This could be through
+              email newsletters, social media announcements, or notifications
+              within the Product-Search platform itself.
+            </p>
+          </div>
+          <div className="about-description__getting-2-bg-img"></div>
+        </div>
+        <div className="about-description__getting about-description__getting-3">
+          <div className="about-description__getting-3-bg-img"></div>
+          <div className="about-description__getting-3-text">
+            <p>
+              Explore the wide range of products available on Product-Search and
+              make the most of your shopping experience. Whether you’re looking
+              for electronics, fashion, home decor, or anything in between,
+              every purchase brings you closer to Gold Card status.
+            </p>
+            <p>
+              Interact with Product-Search through reviews, feedback, and
+              participation in community discussions. Your engagement not only
+              enriches the shopping experience for yourself and others but also
+              demonstrates your commitment to the Product-Search community.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="about-slider">
+        <div className="slider-wrapper">
+          <button
+            className="slider-btn btn-left"
+            onClick={slideLeft}
+            disabled={position === 0}
+          >
+            &#8592;
+          </button>
+          <div className="slider">
+            {[slides[position], slides[position + 1], slides[position + 2]].map(
+              (item, index) => {
+                return (
+                  <SliderElement
+                    key={index}
+                    header={item.header}
+                    image={item.image}
+                    text={item.text}
+                  />
+                );
+              }
+            )}
+          </div>
+          <button
+            className="slider-btn btn-right"
+            onClick={slideRight}
+            disabled={position === 6}
+          >
+            {" "}
+            &#8594;
+          </button>
+        </div>
+      </section>
+      <section className="about-statistic">
+        <div className="about-statistic__inf">
+          <div className="about-statistic__clients">
+            <p>
+              <span>35000+</span> clients
+            </p>
+          </div>
+          <div className="about-statistic__countries">
+            <p>
+              <span>30+</span> countries
+            </p>
+          </div>
+          <div className="about-statistic__units">
+            <p>
+              <span>10000+</span> units of product
+            </p>
+          </div>
+        </div>
+        <span className="about-span-1">
+          <div className="about-span-2">
+            <div className="about-span-3">
+              <div className="about-span-4"></div>
+            </div>
+          </div>
+        </span>
+      </section>
     </main>
   );
 };

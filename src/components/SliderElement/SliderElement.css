@@ -1,0 +1,145 @@
+.slider-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 100px;
+  position: relative;
+  height: auto;
+}
+.slider {
+  width: 660px;
+  overflow-x: hidden;
+  display: flex;
+  gap: 20px;
+}
+.slider-item {
+  border: 1px solid pink;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  position: relative;
+  width: 200px;
+  height: auto;
+}
+.slider-item h2 {
+  text-align: center;
+  padding-top: 10px;
+}
+.slider-img {
+  display: flex;
+  flex-direction: column;
+}
+.slider-img img {
+  width: 200px;
+  height: 200px;
+  margin-top: 25px;
+}
+.slider-text-bg {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  background-color: pink;
+  opacity: 0.8;
+  width: 200px;
+  height: 200px;
+  z-index: 3;
+}
+.slider-text {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 20%;
+  right: 0;
+  padding: 15px 5px;
+  font-size: 12px;
+  width: 200px;
+  height: auto;
+  z-index: 5;
+}
+.slider-btn {
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin: 0 30px;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.slider-btn:hover {
+  color: pink;
+}
+
+@media (max-width: 1200px) {
+  .about-slider {
+    margin: 0;
+  }
+  .slider-wrapper {
+    margin: 50px 0;
+    width: 100%;
+  }
+  .slider-text {
+    bottom: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .slider {
+    width: 480px;
+    gap: 15px;
+  }
+  .slider-item {
+    width: 150px;
+    height: auto;
+  }
+
+  .slider-img img {
+    width: 150px;
+    height: 150px;
+  }
+  .slider-text-bg {
+    width: 150px;
+    height: 150px;
+  }
+  .slider-text {
+    width: 150px;
+  }
+  .slider-btn {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 800px) {
+  .slider-btn {
+    margin: 0;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 650px) {
+  .slider-img {
+    display: none;
+  }
+  .slider-item {
+    border-radius: 0;
+  }
+  .slider-item h2 {
+    font-size: 14px;
+  }
+}
+@media (max-width: 450px) {
+  .slider {
+    width: 330px;
+    gap: 10px;
+  }
+  .slider-item {
+    width: 100px;
+  }
+  .slider-item h2 {
+    font-size: 12px;
+  }
+}
+@media (max-width: 380px) {
+  .slider-item h2 {
+    font-size: 10px;
+  }
+}

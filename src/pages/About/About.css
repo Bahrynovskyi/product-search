@@ -50,7 +50,7 @@
 }
 .about-reasons-list__item:hover {
   color: black;
-  background-color: aliceblue;
+  background-color: #efe0e0;
   border: 4px double #000000;
 }
 
@@ -354,5 +354,307 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+}
+
+/*-----------------------------------------------*/
+
+.about-description {
+  background-color: #000000;
+  background-image: linear-gradient(20deg, #000000 30%, #434343 120%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10vh;
+}
+.about-description h2 {
+  color: pink;
+  font-size: 72px;
+  border: 6px double pink;
+  display: block;
+  padding: 20px 30px;
+  text-align: center;
+  width: 40vw;
+  display: flex;
+  align-self: flex-end;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.about-description__getting {
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+  margin: auto;
+  gap: 5vw;
+}
+.about-description__getting-1-text,
+.about-description__getting-2-text,
+.about-description__getting-3-text {
+  width: 60vw;
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+}
+
+.about-description__getting-1-bg-img {
+  width: 400px;
+  height: 300px;
+  background-color: #fff;
+  transform: rotate(15deg);
+  border-radius: 20px;
+  background-image: url("../../images/getting-1.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+.about-description__getting-1:hover .about-description__getting-1-bg-img,
+.about-description__getting-2:hover .about-description__getting-2-bg-img,
+.about-description__getting-3:hover .about-description__getting-3-bg-img {
+  opacity: 0.3;
+  transition: 0.5s;
+}
+
+.about-description__getting-2-bg-img {
+  width: 300px;
+  height: 800px;
+  background-color: #fff;
+  transform: rotate(5deg);
+  border-radius: 20px;
+  background-image: url("../../images/getting-2.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.about-description__getting-3-bg-img {
+  width: 400px;
+  height: 400px;
+  background-color: #fff;
+  border-radius: 50%;
+  background-image: url("../../images/getting-3.jpg");
+  background-size: cover;
+  background-position: center center;
+  margin-bottom: 20px;
+}
+
+.about-description__getting-2-text {
+  font-size: 24px;
+  font-style: italic;
+}
+
+@media (max-width: 1400px) {
+  .about-description h2 {
+    font-size: 48px;
+    padding: 10px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-description__getting-1-bg-img {
+    width: 200px;
+    height: 200px;
+    transform: rotate(10deg);
+  }
+
+  .about-description__getting-2-bg-img {
+    width: 300px;
+    height: 400px;
+    transform: rotate(-10deg);
+  }
+  .about-description__getting-3-bg-img {
+    width: 300px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 800px) {
+  .about-description__getting {
+    width: 90vw;
+  }
+  .about-description__getting-1-bg-img,
+  .about-description__getting-2-bg-img {
+    transform: rotate(0deg);
+  }
+  .about-description__getting-2-text {
+    font-size: 16px;
+    font-style: normal;
+  }
+  .about-description__getting-1-text,
+  .about-description__getting-3-text {
+    flex-direction: column;
+  }
+  .about-description__getting-3-text {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-description__getting-1-bg-img {
+    width: 200px;
+    height: auto;
+  }
+  .about-description__getting-2-bg-img {
+    width: 200px;
+    height: auto;
+  }
+  .about-description__getting-3 {
+    align-items: center;
+    width: 400px;
+    height: 400px;
+  }
+
+  .about-description__getting-3-bg-img {
+    border-radius: 10px;
+    width: 300px;
+    height: 400px;
+  }
+  .about-description__getting-3 p:last-of-type {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .about-description__getting-1-bg-img,
+  .about-description__getting-2-bg-img,
+  .about-description__getting-3-bg-img {
+    display: none;
+  }
+  .about-description__getting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100vw;
+  }
+  .about-description__getting p {
+    margin: 0;
+    padding: 0;
+    width: 90vw;
+  }
+  .about-description {
+    gap: 0;
+  }
+  .about-description__getting-2-text {
+    width: 90vw;
+  }
+  .about-description__getting-3 {
+    height: auto;
+  }
+  .about-description__getting-1-text,
+  .about-description__getting-2-text,
+  .about-description__getting-3-text {
+    margin-top: 5vh;
+  }
+}
+
+/*-----------------------------------------*/
+
+.about-statistic {
+  background-color: #080808;
+  margin-top: 300px;
+  text-transform: uppercase;
+  position: relative;
+}
+.about-statistic__inf {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: white;
+  width: 50vw;
+  font-size: 48px;
+  gap: 3vw;
+  margin-left: 1vw;
+}
+
+.about-statistic__clients span {
+  color: yellowgreen;
+}
+
+.about-statistic__countries span {
+  color: seagreen;
+}
+
+.about-statistic__units span {
+  color: springgreen;
+}
+.about-span-1 {
+  position: absolute;
+  top: -75px;
+  right: 200px;
+  display: block;
+  width: 300px;
+  height: 300px;
+  background-color: pink;
+  border-radius: 50%;
+  transition: 1s;
+}
+.about-span-1:hover {
+  background-color: #fff;
+}
+.about-span-1:hover .about-span-2 {
+  background-color: pink;
+}
+.about-span-2 {
+  border-radius: 50%;
+  position: absolute;
+  top: 75px;
+  right: 75px;
+  display: block;
+  width: 150px;
+  height: 150px;
+  background-color: #080808;
+  transition: 2s;
+}
+.about-span-2:hover {
+  background-color: pink;
+}
+
+@media (max-width: 1500px) {
+  .about-statistic__inf {
+    font-size: 36px;
+    width: 60vw;
+  }
+}
+@media (max-width: 1300px) {
+  .about-span-1 {
+    right: 100px;
+  }
+}
+@media (max-width: 1000px) {
+  .about-statistic {
+    margin-top: 100px;
+  }
+  .about-span-1 {
+    right: 50px;
+    width: 200px;
+    height: 200px;
+  }
+  .about-span-2 {
+    width: 100px;
+    height: 100px;
+    top: 50px;
+    right: 50px;
+  }
+}
+
+@media (max-width: 800px) {
+  .about-statistic__inf {
+    font-size: 14px;
+  }
+}
+@media (max-width: 600px) {
+  .about-span-1 {
+    right: 25px;
+    width: 100px;
+    height: 100px;
+    top: -50px;
+  }
+  .about-span-2 {
+    width: 50px;
+    height: 50px;
+    top: 25px;
+    right: 25px;
   }
 }
