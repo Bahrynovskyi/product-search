@@ -1,12 +1,20 @@
 .products-wrapper {
   min-height: 75vh;
-  width: 80vw;
+  width: 100vw;
   margin: 100px auto;
+  display: flex;
+  justify-content: space-around;
 }
+.products-filtration {
+  width: 20vw;
+  border: 4px double pink;
+}
+
 .products-items {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   gap: 2vw;
   justify-content: space-between;
+  width: 75vw;
 }
