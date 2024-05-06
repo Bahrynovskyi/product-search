@@ -15,6 +15,44 @@
   flex-wrap: wrap;
   flex-direction: row;
   gap: 2vw;
-  justify-content: space-between;
   width: 75vw;
+}
+.products-filtration__input {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.products-filtration__input input {
+  width: 80%;
+  height: 50px;
+  padding: 10px;
+  border: 4px double pink;
+  background-image: url("../../images/search-14-24.jpg");
+  background-repeat: no-repeat;
+  background-position: 97% 55%;
+  padding-left: 5px;
+  padding-right: 40px;
+  color: pink;
+  font-size: 24px;
+}
+.products-filtration__input input:focus {
+  outline: none;
+}
+
+.products-filtration__categories {
+  margin-top: 20px;
+  margin-left: 20px;
+  display: flex;
+  gap: 5px;
+}
+
+.products-filtration__categories-btn {
+  padding: 5px;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid grey;
+}
+
+.products-filtration__categories-btn:hover {
+  background-color: pink;
 }

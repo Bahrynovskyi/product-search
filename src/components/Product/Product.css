@@ -36,7 +36,10 @@
   color: white;
   background-color: lightgray;
 }
-.procut-btn {
+.product-category:hover {
+}
+.procut-btn-buy,
+.procut-btn-details {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 16px;
@@ -51,6 +54,16 @@
   color: white;
 }
 
-.procut-btn:hover {
-  background-color: #40ff01;
+.procut-btn-buy {
+  background-color: #51c878;
+}
+.procut-btn-details {
+  color: black;
+  background-color: #f7b8bc;
+}
+.procut-btn-details:hover {
+  background-color: #ba7c97;
+}
+.procut-btn-buy:hover {
+  background-color: #164841;
 }

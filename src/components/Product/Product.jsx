@@ -10,7 +10,8 @@ const Product = ({ id, name, price, category, image }) => {
         <span className="product-price">{price}$</span>
         <span className="product-category">{category}</span>
       </div>
-      <button className="procut-btn">Buy</button>
+      <button className="procut-btn-details">Details</button>
+      <button className="procut-btn-buy">Buy</button>
     </div>
   );
 };
