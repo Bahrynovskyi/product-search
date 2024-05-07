@@ -1,0 +1,23 @@
+.absent-product {
+  width: 80%;
+  height: 300px;
+  margin: auto;
+  align-self: left;
+  justify-self: left;
+  border: 4px double pink;
+}
+
+.absent-product p {
+  color: pink;
+  font-size: 36px;
+  width: 80%;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.absent-product-img img {
+  width: 150px;
+  height: 130px;
+  display: block;
+  margin: 20px auto;
+}

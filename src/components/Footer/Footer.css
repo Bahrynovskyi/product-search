@@ -15,11 +15,3 @@
   font-size: 20px;
   font-weight: 600;
 }
-
-@media (max-width: 1400px) {
-  .span-1,
-  .span-2,
-  .span-3 {
-    display: none;
-  }
-}
