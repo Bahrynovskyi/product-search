@@ -72,3 +72,55 @@
 .products-filtration__categories-btn:hover {
   background-color: pink;
 }
+
+.products-filtration__price {
+  display: flex;
+  margin-top: 20px;
+  gap: 1vw;
+  margin-left: 10px;
+}
+
+.products-filtration__price input {
+  width: 100px;
+  padding: 10px;
+  border: 4px double pink;
+  color: pink;
+  font-size: 20px;
+}
+.products-filtration__price input::placeholder {
+  font-size: 12px;
+  color: pink;
+}
+.products-filtration__price button {
+  width: 50px;
+  background-color: pink;
+  outline: none;
+  cursor: pointer;
+  border: 4px double white;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.products-filtration__price button:hover {
+  background-color: #fff;
+  color: pink;
+  border-color: pink;
+}
+
+.products-filtration__sort p {
+  margin-left: 20px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: salmon;
+}
+.products-filtration__sort select {
+  margin-left: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  border: 4px double pink;
+  font-size: 16px;
+  color: #592131;
+}

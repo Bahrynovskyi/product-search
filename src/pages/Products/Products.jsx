@@ -11,6 +11,8 @@ const Products = () => {
   const [searchOptions, setSearchOptions] = useState({});
   const [productsToShow, setProductsToShow] = useState(data);
   const [searchInput, setSearchInput] = useState("");
+  const [inputPrice, setInputPrice] = useState({ from: "", to: "" });
+  const [selectedSortOption, setSelectedSortOption] = useState("");
 
   const categoriesList = Array.from(
     new Set([...data.map((item) => item.category)])
@@ -20,10 +22,13 @@ const Products = () => {
     findText();
   }, [searchInput]);
 
+  useEffect(() => {
+    sortProductsToShow();
+  }, [selectedSortOption]);
+
   const handleInput = (text) => {
     setSearchInput(text);
     findText();
-    console.log(productsToShow);
   };
 
   const handleClearInput = () => {
@@ -43,7 +48,31 @@ const Products = () => {
   const handleGetCategory = (category) => {
     const products = data.filter((item) => item.category === category);
     setProductsToShow(products);
-    console.log(category);
+  };
+
+  const handleInputPriceFromChange = (e) => {
+    setInputPrice({ ...inputPrice, from: +e.target.value });
+  };
+
+  const handleInputPriceToChange = (e) => {
+    setInputPrice({ ...inputPrice, to: +e.target.value });
+  };
+
+  const FilterProductsByPrice = () => {
+    if (inputPrice.from && inputPrice.to) {
+      const filteredProducts = productsToShow.filter(
+        (item) => item.price >= inputPrice.from && item.price <= inputPrice.to
+      );
+      setProductsToShow(filteredProducts);
+    }
+  };
+
+  const handleChangeSort = (e) => {
+    setSelectedSortOption(e.target.value);
+  };
+
+  const sortProductsToShow = () => {
+    console.log(selectedSortOption);
   };
 
   return (
@@ -76,7 +105,39 @@ const Products = () => {
             </button>
           ))}
         </div>
-        <div className="products-filtration__price"></div>
+        <div className="products-filtration__price">
+          <input
+            type="number"
+            placeholder="Min price"
+            name="filtration-price_from"
+            value={inputPrice.from}
+            onChange={handleInputPriceFromChange}
+          />
+          <input
+            type="number"
+            placeholder="Max price"
+            name="filtration-price_to"
+            value={inputPrice.to}
+            onChange={handleInputPriceToChange}
+          />
+          <button onClick={FilterProductsByPrice}>Go</button>
+        </div>
+        <div className="products-filtration__sort">
+          <p>Sort by:</p>
+          <select name="sort-products" onChange={handleChangeSort}>
+            <option selected disabled="disabled" value="">
+              Please choose an option
+            </option>
+            <option value="order-alphabet-a-z">Order by alphabet(A-Z)</option>
+            <option value="order-alphabet-z-a">Order by alphabet(Z-A)</option>
+            <option value="order-price-lower-higher">
+              Order by price(lower-higher)
+            </option>
+            <option value="order-price-higher-lower">
+              Order by price(higher-lower)
+            </option>
+          </select>
+        </div>
       </div>
       <div className="products-items">
         {productsToShow.length === 0 ? (

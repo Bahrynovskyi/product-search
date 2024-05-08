@@ -37,9 +37,9 @@ const Contacts = () => {
         <iframe
           className="contacts-map__google-map"
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3039991.507150078!2d-73.193531!3d41.919911!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2z0KHQv9C-0LvRg9GH0LXQvdGWINCo0YLQsNGC0Lgg0JDQvNC10YDQuNC60Lg!5e0!3m2!1suk!2sen!4v1714897307897!5m2!1sen!2sen"
-          allowfullscreen=""
+          allowFullScreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
+          referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
     </div>
