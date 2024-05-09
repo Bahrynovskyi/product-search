@@ -7,9 +7,10 @@ import { useState } from "react";
 
 const Products = () => {
   const [data] = useGetData();
-
-  const [searchOptions, setSearchOptions] = useState({});
-  const [productsToShow, setProductsToShow] = useState(data);
+  const [productsToShow, setProductsToShow] = useState([...data]);
+  const [previousProductsToShow, setPreviousProductsToShow] = useState([
+    ...productsToShow,
+  ]);
   const [searchInput, setSearchInput] = useState("");
   const [inputPrice, setInputPrice] = useState({ from: "", to: "" });
   const [selectedSortOption, setSelectedSortOption] = useState("");
@@ -36,17 +37,17 @@ const Products = () => {
   };
 
   const findText = () => {
-    const products = productsToShow.filter((item) =>
-      item.product_name.toLowerCase().startsWith(searchInput.toLowerCase())
-    );
-    setProductsToShow(products);
-    if (searchInput === "") {
-      setProductsToShow(data);
+    if (searchInput !== "") {
+      const products = [...productsToShow].filter((item) =>
+        item.product_name.toLowerCase().startsWith(searchInput.toLowerCase())
+      );
+      setPreviousProductsToShow(products);
+      setProductsToShow(products);
     }
   };
 
   const handleGetCategory = (category) => {
-    const products = data.filter((item) => item.category === category);
+    const products = [...data].filter((item) => item.category === category);
     setProductsToShow(products);
   };
 
@@ -60,19 +61,59 @@ const Products = () => {
 
   const FilterProductsByPrice = () => {
     if (inputPrice.from && inputPrice.to) {
-      const filteredProducts = productsToShow.filter(
+      const filteredProducts = [...productsToShow].filter(
         (item) => item.price >= inputPrice.from && item.price <= inputPrice.to
       );
       setProductsToShow(filteredProducts);
     }
+    if (productsToShow.length === 0) {
+      return -1;
+    }
   };
 
-  const handleChangeSort = (e) => {
-    setSelectedSortOption(e.target.value);
+  const handleSelectSort = (e) => {
+    setSelectedSortOption(e);
   };
 
   const sortProductsToShow = () => {
-    console.log(selectedSortOption);
+    switch (selectedSortOption) {
+      case "order-alphabet-a-z": {
+        const sortedArray = [...productsToShow].sort((a, b) => {
+          return a.product_name.toLowerCase() === b.product_name.toLowerCase()
+            ? 0
+            : a.product_name.toLowerCase() > b.product_name.toLowerCase()
+            ? 1
+            : -1;
+        });
+        setProductsToShow(sortedArray);
+        break;
+      }
+      case "order-alphabet-z-a": {
+        const sortedArray = [...productsToShow].sort((a, b) => {
+          return a.product_name.toLowerCase() === b.product_name.toLowerCase()
+            ? 0
+            : a.product_name.toLowerCase() > b.product_name.toLowerCase()
+            ? -1
+            : 1;
+        });
+        setProductsToShow(sortedArray);
+        break;
+      }
+      case "order-price-lower-higher": {
+        const sortedArray = [...productsToShow].sort((a, b) => {
+          return a.price === b.price ? 0 : a.price > b.price ? 1 : -1;
+        });
+        setProductsToShow(sortedArray);
+        break;
+      }
+      case "order-price-higher-lower": {
+        const sortedArray = [...productsToShow].sort((a, b) => {
+          return a.price === b.price ? 0 : a.price > b.price ? -1 : 1;
+        });
+        setProductsToShow(sortedArray);
+        break;
+      }
+    }
   };
 
   return (
@@ -124,7 +165,10 @@ const Products = () => {
         </div>
         <div className="products-filtration__sort">
           <p>Sort by:</p>
-          <select name="sort-products" onChange={handleChangeSort}>
+          <select
+            name="sort-products"
+            onChange={(e) => handleSelectSort(e.target.value)}
+          >
             <option selected disabled="disabled" value="">
               Please choose an option
             </option>
