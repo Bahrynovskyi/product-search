@@ -1,15 +1,18 @@
 .products-wrapper {
   min-height: 75vh;
   width: 100vw;
-  margin: 100px auto;
+  margin: 150px auto 50px;
   display: flex;
   justify-content: space-around;
 }
 .products-filtration {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
   width: 20vw;
   height: auto;
-  border: 4px double pink;
+  /* border: 4px double pink; */
+  /* padding: 20px; */
 }
 
 .products-items {
@@ -20,8 +23,6 @@
   width: 75vw;
 }
 .products-filtration__input {
-  margin-left: 10px;
-  margin-top: 10px;
   position: relative;
 }
 .products-filtration__input input {
@@ -53,8 +54,6 @@
 }
 
 .products-filtration__categories {
-  margin-top: 20px;
-  margin-left: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
@@ -68,16 +67,15 @@
   cursor: pointer;
   border: 1px solid grey;
 }
-
+.products-filtration__categories-btn_checked,
 .products-filtration__categories-btn:hover {
   background-color: pink;
 }
 
 .products-filtration__price {
   display: flex;
-  margin-top: 20px;
+
   gap: 1vw;
-  margin-left: 10px;
 }
 
 .products-filtration__price input {
@@ -91,7 +89,27 @@
   font-size: 12px;
   color: pink;
 }
-.products-filtration__price button {
+
+.products-filtration__sort p,
+.products-filtration__sort-year p {
+  font-size: 20px;
+  font-weight: bold;
+  color: salmon;
+}
+.products-filtration__sort select,
+.products-filtration__sort-year select {
+  margin-top: 5px;
+  padding: 10px;
+  border: 4px double pink;
+  font-size: 16px;
+  color: #592131;
+}
+
+.products-filtration__buttons {
+  display: flex;
+  gap: 1vw;
+}
+.products-filtration__buttons button {
   width: 50px;
   background-color: pink;
   outline: none;
@@ -101,26 +119,12 @@
   font-size: 20px;
   font-weight: bold;
   transition: 0.5s;
+  width: 150px;
+  height: 50px;
 }
 
-.products-filtration__price button:hover {
+.products-filtration__buttons button:hover {
   background-color: #fff;
   color: pink;
   border-color: pink;
-}
-
-.products-filtration__sort p {
-  margin-left: 20px;
-  margin-top: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  color: salmon;
-}
-.products-filtration__sort select {
-  margin-left: 20px;
-  margin-top: 20px;
-  padding: 10px;
-  border: 4px double pink;
-  font-size: 16px;
-  color: #592131;
 }

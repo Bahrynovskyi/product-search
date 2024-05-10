@@ -7,17 +7,31 @@ import { useState } from "react";
 
 const Products = () => {
   const [data] = useGetData();
+
+  const categoriesBtns = [
+    { category: "all", isChecked: true },
+    { category: "clothing", isChecked: false },
+    { category: "beauty", isChecked: false },
+    { category: "home goods", isChecked: false },
+    { category: "toys", isChecked: false },
+    { category: "electronics", isChecked: false },
+  ];
+
+  const options = {
+    category: "",
+    minPrice: "",
+    maxPrice: "",
+    sortingOrder: "",
+    releaseYear: "",
+  };
+
   const [productsToShow, setProductsToShow] = useState([...data]);
-  const [previousProductsToShow, setPreviousProductsToShow] = useState([
-    ...productsToShow,
-  ]);
+  const [filtrationOptions, setFiltrationOptions] = useState(options);
+
   const [searchInput, setSearchInput] = useState("");
   const [inputPrice, setInputPrice] = useState({ from: "", to: "" });
   const [selectedSortOption, setSelectedSortOption] = useState("");
-
-  const categoriesList = Array.from(
-    new Set([...data.map((item) => item.category)])
-  );
+  const [categoryBtnChecked, setCategoryBtnChecked] = useState("all");
 
   useEffect(() => {
     findText();
@@ -26,6 +40,10 @@ const Products = () => {
   useEffect(() => {
     sortProductsToShow();
   }, [selectedSortOption]);
+
+  const productYears = Array.from(
+    new Set([...data.map((item) => item.release_date.slice(-4))])
+  ).sort((a, b) => a - b);
 
   const handleInput = (text) => {
     setSearchInput(text);
@@ -41,14 +59,12 @@ const Products = () => {
       const products = [...productsToShow].filter((item) =>
         item.product_name.toLowerCase().startsWith(searchInput.toLowerCase())
       );
-      setPreviousProductsToShow(products);
       setProductsToShow(products);
     }
   };
 
-  const handleGetCategory = (category) => {
-    const products = [...data].filter((item) => item.category === category);
-    setProductsToShow(products);
+  const handleGetCategory = (categoryName) => {
+    setCategoryBtnChecked(categoryName);
   };
 
   const handleInputPriceFromChange = (e) => {
@@ -116,6 +132,14 @@ const Products = () => {
     }
   };
 
+  const handleSelectSortByYear = (year_value) => {
+    const year = year_value.slice(-4);
+    const products = [...productsToShow].filter((item) => {
+      return item.release_date.slice(-4) === year;
+    });
+    setProductsToShow(products);
+  };
+
   return (
     <div className="products-wrapper">
       <div className="products-filtration">
@@ -136,13 +160,17 @@ const Products = () => {
           )}
         </div>
         <div className="products-filtration__categories">
-          {categoriesList.map((item, index) => (
+          {categoriesBtns.map((item, index) => (
             <button
-              key={index + "" + item}
-              className="products-filtration__categories-btn"
-              onClick={() => handleGetCategory(item)}
+              key={index + "" + item.category}
+              className={
+                item.isChecked
+                  ? `products-filtration__categories-btn products-filtration__categories-btn_checked`
+                  : `products-filtration__categories-btn products-filtration__categories`
+              }
+              onClick={() => handleGetCategory(item.category)}
             >
-              {item}
+              {item.category}
             </button>
           ))}
         </div>
@@ -161,7 +189,6 @@ const Products = () => {
             value={inputPrice.to}
             onChange={handleInputPriceToChange}
           />
-          <button onClick={FilterProductsByPrice}>Go</button>
         </div>
         <div className="products-filtration__sort">
           <p>Sort by:</p>
@@ -182,12 +209,31 @@ const Products = () => {
             </option>
           </select>
         </div>
+
+        <div className="products-filtration__sort-year">
+          <p>Choose release date:</p>
+          <select
+            name="sort-products"
+            onChange={(e) => handleSelectSortByYear(e.target.value)}
+          >
+            <option selected disabled="disabled" value="">
+              Please choose a year of release
+            </option>
+            {productYears.map((item) => (
+              <option value={`order-${item}`}>{item}</option>
+            ))}
+          </select>
+        </div>
+        <div className="products-filtration__buttons">
+          <button>Clear All</button>
+          <button>Go</button>
+        </div>
       </div>
       <div className="products-items">
         {productsToShow.length === 0 ? (
           <NoProductsToShow />
         ) : (
-          productsToShow.map((item) => (
+          [...productsToShow].map((item) => (
             <Product
               key={item.product_id}
               name={item.product_name}
