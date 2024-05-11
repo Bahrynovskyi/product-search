@@ -6,8 +6,10 @@ import NoProductsToShow from "../../components/NoProductsToShow/NoProductsToShow
 import { useState } from "react";
 
 const Products = () => {
+  // getting data from json
   const [data] = useGetData();
 
+  // Created this obj categories for display buttons and change the focus
   const categoriesBtns = [
     { category: "all", isChecked: true },
     { category: "clothing", isChecked: false },
@@ -17,37 +19,55 @@ const Products = () => {
     { category: "electronics", isChecked: false },
   ];
 
+  // Main obj state where all data about filtration leaves
   const options = {
     category: "",
-    minPrice: "",
-    maxPrice: "",
+    minPrice: null,
+    maxPrice: null,
     sortingOrder: "",
     releaseYear: "",
   };
 
   const [productsToShow, setProductsToShow] = useState([...data]);
+
   const [filtrationOptions, setFiltrationOptions] = useState(options);
 
   const [searchInput, setSearchInput] = useState("");
-  const [inputPrice, setInputPrice] = useState({ from: "", to: "" });
-  const [selectedSortOption, setSelectedSortOption] = useState("");
-  const [categoryBtnChecked, setCategoryBtnChecked] = useState("all");
+  const [categoryBtnID, setCategoryBtnID] = useState(0);
 
-  useEffect(() => {
-    findText();
-  }, [searchInput]);
-
-  useEffect(() => {
-    sortProductsToShow();
-  }, [selectedSortOption]);
-
+  // Get array of years from release_date field from json
   const productYears = Array.from(
     new Set([...data.map((item) => item.release_date.slice(-4))])
   ).sort((a, b) => a - b);
 
+  // Handlers
+
+  const handleGetCategory = (id) => {
+    setCategoryBtnID(id);
+    setFiltrationOptions({
+      ...filtrationOptions,
+      category: categoriesBtns[id].category,
+    });
+  };
+
+  const handleInputPriceFromChange = (e) => {
+    setFiltrationOptions({ ...filtrationOptions, minPrice: +e.target.value });
+  };
+
+  const handleInputPriceToChange = (e) => {
+    setFiltrationOptions({ ...filtrationOptions, maxPrice: +e.target.value });
+  };
+
+  const handleSelectSort = (e) => {
+    setFiltrationOptions({ ...filtrationOptions, sortingOrder: e });
+  };
+
+  const handleSelectSortByYear = (year_value) => {
+    setFiltrationOptions({ ...filtrationOptions, releaseYear: year_value });
+  };
+
   const handleInput = (text) => {
     setSearchInput(text);
-    findText();
   };
 
   const handleClearInput = () => {
@@ -63,22 +83,12 @@ const Products = () => {
     }
   };
 
-  const handleGetCategory = (categoryName) => {
-    setCategoryBtnChecked(categoryName);
-  };
-
-  const handleInputPriceFromChange = (e) => {
-    setInputPrice({ ...inputPrice, from: +e.target.value });
-  };
-
-  const handleInputPriceToChange = (e) => {
-    setInputPrice({ ...inputPrice, to: +e.target.value });
-  };
-
   const FilterProductsByPrice = () => {
-    if (inputPrice.from && inputPrice.to) {
+    if (filtrationOptions.minPrice && filtrationOptions.maxPrice) {
       const filteredProducts = [...productsToShow].filter(
-        (item) => item.price >= inputPrice.from && item.price <= inputPrice.to
+        (item) =>
+          item.price >= filtrationOptions.minPrice &&
+          item.price <= filtrationOptions.maxPrice
       );
       setProductsToShow(filteredProducts);
     }
@@ -87,12 +97,8 @@ const Products = () => {
     }
   };
 
-  const handleSelectSort = (e) => {
-    setSelectedSortOption(e);
-  };
-
   const sortProductsToShow = () => {
-    switch (selectedSortOption) {
+    switch (filtrationOptions.sortingOrder) {
       case "order-alphabet-a-z": {
         const sortedArray = [...productsToShow].sort((a, b) => {
           return a.product_name.toLowerCase() === b.product_name.toLowerCase()
@@ -132,13 +138,15 @@ const Products = () => {
     }
   };
 
-  const handleSelectSortByYear = (year_value) => {
+  const filteringByYear = (year_value) => {
     const year = year_value.slice(-4);
     const products = [...productsToShow].filter((item) => {
       return item.release_date.slice(-4) === year;
     });
     setProductsToShow(products);
   };
+
+  console.log(filtrationOptions);
 
   return (
     <div className="products-wrapper">
@@ -160,35 +168,45 @@ const Products = () => {
           )}
         </div>
         <div className="products-filtration__categories">
-          {categoriesBtns.map((item, index) => (
-            <button
-              key={index + "" + item.category}
-              className={
-                item.isChecked
-                  ? `products-filtration__categories-btn products-filtration__categories-btn_checked`
-                  : `products-filtration__categories-btn products-filtration__categories`
-              }
-              onClick={() => handleGetCategory(item.category)}
-            >
-              {item.category}
-            </button>
-          ))}
+          {categoriesBtns.map((item, index) => {
+            if (categoryBtnID === index) {
+              item.isChecked = true;
+            } else {
+              item.isChecked = false;
+            }
+            return (
+              <button
+                key={index + "" + item.category}
+                className={
+                  item.isChecked
+                    ? `products-filtration__categories-btn products-filtration__categories-btn_checked`
+                    : `products-filtration__categories-btn products-filtration__categories`
+                }
+                onClick={() => handleGetCategory(index)}
+              >
+                {item.category}
+              </button>
+            );
+          })}
         </div>
         <div className="products-filtration__price">
-          <input
-            type="number"
-            placeholder="Min price"
-            name="filtration-price_from"
-            value={inputPrice.from}
-            onChange={handleInputPriceFromChange}
-          />
-          <input
-            type="number"
-            placeholder="Max price"
-            name="filtration-price_to"
-            value={inputPrice.to}
-            onChange={handleInputPriceToChange}
-          />
+          <p>Choose price:</p>
+          <div className="products-filtration__price-inner">
+            <input
+              type="number"
+              placeholder="Min price"
+              name="filtration-price_from"
+              value={filtrationOptions.minPrice}
+              onChange={handleInputPriceFromChange}
+            />
+            <input
+              type="number"
+              placeholder="Max price"
+              name="filtration-price_to"
+              value={filtrationOptions.maxPrice}
+              onChange={handleInputPriceToChange}
+            />
+          </div>
         </div>
         <div className="products-filtration__sort">
           <p>Sort by:</p>

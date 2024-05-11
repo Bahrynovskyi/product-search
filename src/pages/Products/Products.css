@@ -11,8 +11,6 @@
   gap: 2vh;
   width: 20vw;
   height: auto;
-  /* border: 4px double pink; */
-  /* padding: 20px; */
 }
 
 .products-items {
@@ -74,10 +72,13 @@
 
 .products-filtration__price {
   display: flex;
-
+  flex-direction: column;
+  gap: 1vh;
+}
+.products-filtration__price-inner {
+  display: flex;
   gap: 1vw;
 }
-
 .products-filtration__price input {
   width: 100px;
   padding: 10px;
@@ -89,7 +90,7 @@
   font-size: 12px;
   color: pink;
 }
-
+.products-filtration__price p,
 .products-filtration__sort p,
 .products-filtration__sort-year p {
   font-size: 20px;
