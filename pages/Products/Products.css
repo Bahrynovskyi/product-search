@@ -1,0 +1,131 @@
+.products-wrapper {
+  min-height: 75vh;
+  width: 100vw;
+  margin: 150px auto 50px;
+  display: flex;
+  justify-content: space-around;
+}
+.products-filtration {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  width: 20vw;
+  height: auto;
+}
+
+.products-items {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 2vw;
+  width: 75vw;
+}
+.products-filtration__input {
+  position: relative;
+}
+.products-filtration__input input {
+  width: 80%;
+  height: 50px;
+  padding: 10px;
+  border: 4px double pink;
+  background-image: url("../../images/search-14-24.jpg");
+  background-repeat: no-repeat;
+  background-position: 97% 55%;
+  padding-left: 5px;
+  padding-right: 45px;
+  padding-left: 15px;
+  color: pink;
+  font-size: 24px;
+}
+.products-filtration__input-clear {
+  position: absolute;
+  bottom: 0px;
+  right: 25px;
+  border: 0;
+  background-color: transparent;
+  color: pink;
+  font-size: 18px;
+  cursor: pointer;
+}
+.products-filtration__input input:focus {
+  outline: none;
+}
+
+.products-filtration__categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.products-filtration__categories-btn {
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid grey;
+}
+.products-filtration__categories-btn_checked,
+.products-filtration__categories-btn:hover {
+  background-color: pink;
+}
+
+.products-filtration__price {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+.products-filtration__price-inner {
+  display: flex;
+  gap: 1vw;
+}
+.products-filtration__price input {
+  width: 100px;
+  padding: 10px;
+  border: 4px double pink;
+  color: pink;
+  font-size: 20px;
+}
+.products-filtration__price input::placeholder {
+  font-size: 12px;
+  color: pink;
+}
+.products-filtration__price p,
+.products-filtration__sort p,
+.products-filtration__sort-year p {
+  font-size: 20px;
+  font-weight: bold;
+  color: salmon;
+}
+.products-filtration__sort select,
+.products-filtration__sort-year select {
+  margin-top: 5px;
+  padding: 10px;
+  border: 4px double pink;
+  font-size: 16px;
+  color: #592131;
+}
+
+.products-filtration__buttons {
+  display: flex;
+  gap: 1vw;
+}
+.products-filtration__buttons button {
+  width: 50px;
+  background-color: pink;
+  outline: none;
+  cursor: pointer;
+  border: 4px double white;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  transition: 0.5s;
+  width: 150px;
+  height: 50px;
+}
+
+.products-filtration__buttons button:hover {
+  background-color: #fff;
+  color: pink;
+  border-color: pink;
+}
