@@ -3,6 +3,7 @@ import "./Products.css";
 import useGetData from "../../hooks/useGetData";
 import Product from "../../components/Product/Product";
 import NoProductsToShow from "../../components/NoProductsToShow/NoProductsToShow";
+
 import { useState } from "react";
 
 const Products = () => {
@@ -19,53 +20,31 @@ const Products = () => {
     { category: "electronics", isChecked: false },
   ];
 
-  // Main obj state where all data about filtration leaves
-  const options = {
-    category: "",
-    minPrice: null,
-    maxPrice: null,
-    sortingOrder: "",
-    releaseYear: "",
-  };
-
   const [productsToShow, setProductsToShow] = useState([...data]);
-
-  const [filtrationOptions, setFiltrationOptions] = useState(options);
-
-  const [searchInput, setSearchInput] = useState("");
   const [categoryBtnID, setCategoryBtnID] = useState(0);
+
+  // State with filtration settings
+  const [searchInput, setSearchInput] = useState("");
+  const [category, setCategory] = useState("all");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [sortingOrder, setSortingOrder] = useState("");
+  const [releaseYear, setReleaseYear] = useState("");
+
+  // State cincerning products
+
+  const [showProductDetails, setShowProductDetails] = useState();
 
   // Get array of years from release_date field from json
   const productYears = Array.from(
     new Set([...data.map((item) => item.release_date.slice(-4))])
   ).sort((a, b) => a - b);
 
+  useEffect(() => {
+    findText();
+  }, [searchInput]);
+
   // Handlers
-
-  const handleGetCategory = (id) => {
-    setCategoryBtnID(id);
-    setFiltrationOptions({
-      ...filtrationOptions,
-      category: categoriesBtns[id].category,
-    });
-  };
-
-  const handleInputPriceFromChange = (e) => {
-    setFiltrationOptions({ ...filtrationOptions, minPrice: +e.target.value });
-  };
-
-  const handleInputPriceToChange = (e) => {
-    setFiltrationOptions({ ...filtrationOptions, maxPrice: +e.target.value });
-  };
-
-  const handleSelectSort = (e) => {
-    setFiltrationOptions({ ...filtrationOptions, sortingOrder: e });
-  };
-
-  const handleSelectSortByYear = (year_value) => {
-    setFiltrationOptions({ ...filtrationOptions, releaseYear: year_value });
-  };
-
   const handleInput = (text) => {
     setSearchInput(text);
   };
@@ -74,79 +53,123 @@ const Products = () => {
     setSearchInput("");
   };
 
+  const handleGetCategory = (id) => {
+    setCategoryBtnID(id);
+    setCategory(categoriesBtns[id].category);
+  };
+
+  const handleInputPriceFromChange = (e) => {
+    setMinPrice(+e);
+  };
+
+  const handleInputPriceToChange = (e) => {
+    setMaxPrice(+e);
+  };
+
+  const handleSelectSort = (e) => {
+    setSortingOrder(e);
+  };
+
+  const handleSelectSortByYear = (year_value) => {
+    setReleaseYear(year_value);
+  };
+
+  // Functions that filter products
   const findText = () => {
     if (searchInput !== "") {
       const products = [...productsToShow].filter((item) =>
         item.product_name.toLowerCase().startsWith(searchInput.toLowerCase())
       );
-      setProductsToShow(products);
+      setProductsToShow([...products]);
     }
   };
 
-  const FilterProductsByPrice = () => {
-    if (filtrationOptions.minPrice && filtrationOptions.maxPrice) {
-      const filteredProducts = [...productsToShow].filter(
-        (item) =>
-          item.price >= filtrationOptions.minPrice &&
-          item.price <= filtrationOptions.maxPrice
+  const filterProductsByCategory = (array) => {
+    if (category === "all") return array;
+    else return array.filter((item) => item.category === category);
+  };
+
+  const filterProductsByPrice = (array) => {
+    if (minPrice && maxPrice && maxPrice >= minPrice && minPrice >= 0) {
+      return array.filter(
+        (item) => item.price >= minPrice && item.price <= maxPrice
       );
-      setProductsToShow(filteredProducts);
-    }
-    if (productsToShow.length === 0) {
-      return -1;
-    }
+    } else return array;
   };
 
-  const sortProductsToShow = () => {
-    switch (filtrationOptions.sortingOrder) {
-      case "order-alphabet-a-z": {
-        const sortedArray = [...productsToShow].sort((a, b) => {
-          return a.product_name.toLowerCase() === b.product_name.toLowerCase()
-            ? 0
-            : a.product_name.toLowerCase() > b.product_name.toLowerCase()
-            ? 1
-            : -1;
-        });
-        setProductsToShow(sortedArray);
-        break;
+  const filterProductsBySort = (array) => {
+    if (sortingOrder) {
+      switch (sortingOrder) {
+        case "order-alphabet-a-z": {
+          return array.sort((a, b) => {
+            return a.product_name.toLowerCase() === b.product_name.toLowerCase()
+              ? 0
+              : a.product_name.toLowerCase() > b.product_name.toLowerCase()
+              ? 1
+              : -1;
+          });
+        }
+        case "order-alphabet-z-a": {
+          return array.sort((a, b) => {
+            return a.product_name.toLowerCase() === b.product_name.toLowerCase()
+              ? 0
+              : a.product_name.toLowerCase() > b.product_name.toLowerCase()
+              ? -1
+              : 1;
+          });
+        }
+        case "order-price-lower-higher": {
+          return array.sort((a, b) => {
+            return a.price === b.price ? 0 : a.price > b.price ? 1 : -1;
+          });
+        }
+        case "order-price-higher-lower": {
+          return array.sort((a, b) => {
+            return a.price === b.price ? 0 : a.price > b.price ? -1 : 1;
+          });
+        }
       }
-      case "order-alphabet-z-a": {
-        const sortedArray = [...productsToShow].sort((a, b) => {
-          return a.product_name.toLowerCase() === b.product_name.toLowerCase()
-            ? 0
-            : a.product_name.toLowerCase() > b.product_name.toLowerCase()
-            ? -1
-            : 1;
-        });
-        setProductsToShow(sortedArray);
-        break;
-      }
-      case "order-price-lower-higher": {
-        const sortedArray = [...productsToShow].sort((a, b) => {
-          return a.price === b.price ? 0 : a.price > b.price ? 1 : -1;
-        });
-        setProductsToShow(sortedArray);
-        break;
-      }
-      case "order-price-higher-lower": {
-        const sortedArray = [...productsToShow].sort((a, b) => {
-          return a.price === b.price ? 0 : a.price > b.price ? -1 : 1;
-        });
-        setProductsToShow(sortedArray);
-        break;
-      }
-    }
+    } else return array;
   };
 
-  const filteringByYear = (year_value) => {
-    const year = year_value.slice(-4);
-    const products = [...productsToShow].filter((item) => {
-      return item.release_date.slice(-4) === year;
-    });
-    setProductsToShow(products);
+  const filterProductsByYear = (array) => {
+    if (releaseYear) {
+      return array.filter((item) => {
+        return item.release_date.slice(-4) === releaseYear;
+      });
+    } else return array;
   };
 
-  console.log(filtrationOptions);
+  const clearFiltration = () => {
+    setProductsToShow([...data]);
+    setSearchInput("");
+    setCategory("");
+    setMinPrice("");
+    setMaxPrice("");
+    setSortingOrder("");
+    setReleaseYear("");
+    setCategoryBtnID(0);
+  };
+
+  const filterProducts = () => {
+    setProductsToShow(
+      filterProductsByYear(
+        filterProductsBySort(
+          filterProductsByPrice(filterProductsByCategory([...productsToShow]))
+        )
+      )
+    );
+  };
+
+  // **********
+
+  // Functions that work with productItems
+
+  const handleDetails = (id) => {
+    console.log(id);
+  };
+
+  console.log(productsToShow);
 
   return (
     <div className="products-wrapper">
@@ -196,15 +219,15 @@ const Products = () => {
               type="number"
               placeholder="Min price"
               name="filtration-price_from"
-              value={filtrationOptions.minPrice}
-              onChange={handleInputPriceFromChange}
+              value={minPrice}
+              onChange={(e) => handleInputPriceFromChange(e.target.value)}
             />
             <input
               type="number"
               placeholder="Max price"
               name="filtration-price_to"
-              value={filtrationOptions.maxPrice}
-              onChange={handleInputPriceToChange}
+              value={maxPrice}
+              onChange={(e) => handleInputPriceToChange(e.target.value)}
             />
           </div>
         </div>
@@ -238,26 +261,28 @@ const Products = () => {
               Please choose a year of release
             </option>
             {productYears.map((item) => (
-              <option value={`order-${item}`}>{item}</option>
+              <option value={`${item}`}>{item}</option>
             ))}
           </select>
         </div>
         <div className="products-filtration__buttons">
-          <button>Clear All</button>
-          <button>Go</button>
+          <button onClick={clearFiltration}>Clear All</button>
+          <button onClick={filterProducts}>Go</button>
         </div>
       </div>
       <div className="products-items">
-        {productsToShow.length === 0 ? (
+        {productsToShow.length === 0 || !productsToShow ? (
           <NoProductsToShow />
         ) : (
           [...productsToShow].map((item) => (
             <Product
               key={item.product_id}
+              id={item.product_id}
               name={item.product_name}
               price={item.price}
               category={item.category}
               image={item.image}
+              handleDetails={handleDetails}
             />
           ))
         )}

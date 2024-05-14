@@ -6,6 +6,7 @@ import Contacts from "./pages/Contacts/Contacts";
 import NotFound from "./pages/NotFound/NotFound";
 import MainLayout from "./layouts/MainLayout";
 import Products from "./pages/Products/Products";
+import DetailedProduct from "./pages/DetailedProduct/DetailedProduct";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="about" element={<About />} />
             <Route path="contacts" element={<Contacts />} />
             <Route path="products" element={<Products />} />
+            <Route path="products/product/:id" element={<DetailedProduct />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

@@ -1,5 +1,12 @@
 import "./Product.css";
-const Product = ({ id, name, price, category, image }) => {
+import { useNavigate } from "react-router-dom";
+
+const Product = ({ id, name, price, category, image, handleDetails }) => {
+  const navigate = useNavigate();
+  const navigateToProductDetails = () => {
+    navigate(`/products/product/${id}`);
+  };
+
   return (
     <div className="product-wrapper">
       <div className="product-image">
@@ -10,7 +17,9 @@ const Product = ({ id, name, price, category, image }) => {
         <span className="product-price">{price}$</span>
         <span className="product-category">{category}</span>
       </div>
-      <button className="procut-btn-details">Details</button>
+      <button className="procut-btn-details" onClick={navigateToProductDetails}>
+        Details
+      </button>
       <button className="procut-btn-buy">Buy</button>
     </div>
   );
