@@ -3,7 +3,8 @@ import "./Products.css";
 import useGetData from "../../hooks/useGetData";
 import Product from "../../components/Product/Product";
 import NoProductsToShow from "../../components/NoProductsToShow/NoProductsToShow";
-
+import Basket from "../../components/Basket/Basket";
+import ProductsInBasket from "../../components/ProductsInBasket/ProductsInBasket";
 import { useState } from "react";
 
 const Products = () => {
@@ -31,9 +32,9 @@ const Products = () => {
   const [sortingOrder, setSortingOrder] = useState("");
   const [releaseYear, setReleaseYear] = useState("");
 
-  // State cincerning products
-
-  const [showProductDetails, setShowProductDetails] = useState();
+  // State that concerns basket
+  const [productsInBasket, setProductsInBasket] = useState([]);
+  const [showProductsInBasket, setShowProductsInBasket] = useState(false);
 
   // Get array of years from release_date field from json
   const productYears = Array.from(
@@ -161,18 +162,31 @@ const Products = () => {
     );
   };
 
-  // **********
+  // Functions that works with basket
 
-  // Functions that work with productItems
-
-  const handleDetails = (id) => {
-    console.log(id);
+  const openBasket = () => {
+    setShowProductsInBasket(true);
   };
 
-  console.log(productsToShow);
+  const closeBasket = () => {
+    setShowProductsInBasket(false);
+  };
+
+  const addProductToBasket = (id) => {
+    console.log(id);
+    setProductsInBasket((prev) => [...prev, data[id]]);
+  };
 
   return (
     <div className="products-wrapper">
+      <Basket itemsCount={productsInBasket.length} openBasket={openBasket} />
+
+      {showProductsInBasket && (
+        <ProductsInBasket
+          closeBasket={closeBasket}
+          productsInBasket={productsInBasket}
+        />
+      )}
       <div className="products-filtration">
         <div className="products-filtration__input">
           <input
@@ -282,7 +296,7 @@ const Products = () => {
               price={item.price}
               category={item.category}
               image={item.image}
-              handleDetails={handleDetails}
+              addProductToBasket={() => addProductToBasket(item.product_id)}
             />
           ))
         )}

@@ -1,0 +1,9 @@
+.products-in-basket {
+  border: 1px solid grey;
+  position: absolute;
+  width: 500px;
+  height: 800px;
+  background-color: #fff;
+}
+.close-the-basket {
+}

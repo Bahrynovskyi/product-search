@@ -1,7 +1,7 @@
 import "./Product.css";
 import { useNavigate } from "react-router-dom";
 
-const Product = ({ id, name, price, category, image, handleDetails }) => {
+const Product = ({ id, name, price, category, image, addProductToBasket }) => {
   const navigate = useNavigate();
   const navigateToProductDetails = () => {
     navigate(`/products/product/${id}`);
@@ -20,7 +20,9 @@ const Product = ({ id, name, price, category, image, handleDetails }) => {
       <button className="procut-btn-details" onClick={navigateToProductDetails}>
         Details
       </button>
-      <button className="procut-btn-buy">Buy</button>
+      <button className="procut-btn-buy" onClick={addProductToBasket}>
+        Buy
+      </button>
     </div>
   );
 };
