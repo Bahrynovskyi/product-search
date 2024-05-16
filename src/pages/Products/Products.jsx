@@ -35,7 +35,7 @@ const Products = () => {
   // State that concerns basket
   const [productsInBasket, setProductsInBasket] = useState([]);
   const [showProductsInBasket, setShowProductsInBasket] = useState(false);
-
+  const [productsPriceInBasket, setProductsPriceInBasket] = useState(0);
   // Get array of years from release_date field from json
   const productYears = Array.from(
     new Set([...data.map((item) => item.release_date.slice(-4))])
@@ -174,6 +174,7 @@ const Products = () => {
 
   const addProductToBasket = (id) => {
     console.log(id);
+    setProductsPriceInBasket(10);
     setProductsInBasket((prev) => [...prev, data[id]]);
   };
 
@@ -185,6 +186,7 @@ const Products = () => {
         <ProductsInBasket
           closeBasket={closeBasket}
           productsInBasket={productsInBasket}
+          productsPriceInBasket={productsPriceInBasket}
         />
       )}
       <div className="products-filtration">
@@ -296,7 +298,7 @@ const Products = () => {
               price={item.price}
               category={item.category}
               image={item.image}
-              addProductToBasket={() => addProductToBasket(item.product_id)}
+              addProductToBasket={() => addProductToBasket(item.product_id - 1)}
             />
           ))
         )}

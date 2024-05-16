@@ -3,7 +3,62 @@
   position: absolute;
   width: 500px;
   height: 800px;
+  overflow-y: auto;
   background-color: #fff;
 }
 .close-the-basket {
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close-the-basket:hover {
+  color: pink;
+  border-bottom: 3px solid pink;
+}
+.product-items-in-basket {
+  margin-top: 100px;
+}
+.product-item-in-basket {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1vw;
+  border-bottom: 1px solid grey;
+  padding-bottom: 15px;
+}
+
+.product-item-in-basket-img {
+  width: 50px;
+  height: 50px;
+  border: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+}
+.product-item-in-basket-name {
+  font-size: 20px;
+}
+
+.product-item-in-basket-price {
+  margin-right: 15px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.total-price-in-basket {
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.total-price-in-basket span {
+  margin-left: 10px;
 }
