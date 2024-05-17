@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./ProductsInBasket.css";
 import { IoClose } from "react-icons/io5";
+import { IoIosClose } from "react-icons/io";
 
 const ProductsInBasket = ({
   productsInBasket,
   closeBasket,
   productsPriceInBasket,
+  removeItemFromBasket,
 }) => {
   console.log(productsInBasket);
 
@@ -15,7 +17,7 @@ const ProductsInBasket = ({
         <IoClose className="" onClick={closeBasket} />
       </button>
       <div className="product-items-in-basket">
-        {productsInBasket.map((product) => (
+        {productsInBasket.map((product, index) => (
           <div className="product-item-in-basket">
             <div className="product-item-in-basket-img">
               <img src={product.image} alt="product image"></img>
@@ -24,11 +26,17 @@ const ProductsInBasket = ({
               {product.product_name}
             </p>
             <div className="product-item-in-basket-price">{product.price}$</div>
+            <div
+              className="remove-product-item-in-basket"
+              onClick={() => removeItemFromBasket(index)}
+            >
+              <IoIosClose />
+            </div>
           </div>
         ))}
       </div>
       <div className="total-price-in-basket">
-        total price: <span>{productsPriceInBasket}$</span>
+        total price: <span>{productsPriceInBasket.toFixed(2)}$</span>
       </div>
     </div>
   );

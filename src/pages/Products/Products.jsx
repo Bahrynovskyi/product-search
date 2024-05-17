@@ -45,6 +45,14 @@ const Products = () => {
     findText();
   }, [searchInput]);
 
+  useEffect(() => {
+    setProductsPriceInBasket(
+      productsInBasket.reduce((acc, item) => {
+        return acc + item.price;
+      }, 0)
+    );
+  }, [productsInBasket]);
+
   // Handlers
   const handleInput = (text) => {
     setSearchInput(text);
@@ -174,19 +182,28 @@ const Products = () => {
 
   const addProductToBasket = (id) => {
     console.log(id);
-    setProductsPriceInBasket(10);
+    setProductsPriceInBasket((prev) => (prev += data[id].price));
     setProductsInBasket((prev) => [...prev, data[id]]);
   };
+
+  const removeItemFromBasket = (id) => {
+    setProductsInBasket(
+      [...productsInBasket].filter((product, index) => index !== id)
+    );
+  };
+
+  console.log(productsPriceInBasket);
 
   return (
     <div className="products-wrapper">
       <Basket itemsCount={productsInBasket.length} openBasket={openBasket} />
 
-      {showProductsInBasket && (
+      {showProductsInBasket && productsPriceInBasket > 0 && (
         <ProductsInBasket
           closeBasket={closeBasket}
           productsInBasket={productsInBasket}
           productsPriceInBasket={productsPriceInBasket}
+          removeItemFromBasket={removeItemFromBasket}
         />
       )}
       <div className="products-filtration">
