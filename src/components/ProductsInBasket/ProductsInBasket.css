@@ -1,10 +1,13 @@
 .products-in-basket {
   border: 1px solid grey;
   position: absolute;
+  top: 50px;
+  left: calc(50% - 250px);
   width: 500px;
   height: 800px;
   overflow-y: auto;
   background-color: #fff;
+  z-index: 10;
 }
 .close-the-basket {
   position: absolute;
@@ -44,6 +47,7 @@
 }
 .product-item-in-basket-name {
   font-size: 20px;
+  text-align: center;
 }
 
 .product-item-in-basket-price {
@@ -69,7 +73,33 @@
   display: flex;
   justify-content: center;
   margin-top: 15px;
+  margin-bottom: 20px;
 }
 .total-price-in-basket span {
   margin-left: 10px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+@media (max-width: 800px) {
+  .products-in-basket {
+    height: 600px;
+  }
+}
+
+@media (max-width: 550px) {
+  .products-in-basket {
+    width: 400px;
+    left: calc(50% - 200px);
+  }
+}
+
+@media (max-width: 430px) {
+  .products-in-basket {
+    width: 300px;
+    left: calc(50% - 150px);
+    height: 400px;
+  }
 }

@@ -21,3 +21,25 @@
   display: block;
   margin: 20px auto;
 }
+
+@media (max-width: 1230px) {
+  .absent-product p {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 650px) {
+  .absent-product-img img {
+    width: 100px;
+    height: 100px;
+  }
+  .absent-product p {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 375px) {
+  .absent-product p {
+    font-size: 18px;
+  }
+}

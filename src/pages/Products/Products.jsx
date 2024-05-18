@@ -36,6 +36,7 @@ const Products = () => {
   const [productsInBasket, setProductsInBasket] = useState([]);
   const [showProductsInBasket, setShowProductsInBasket] = useState(false);
   const [productsPriceInBasket, setProductsPriceInBasket] = useState(0);
+
   // Get array of years from release_date field from json
   const productYears = Array.from(
     new Set([...data.map((item) => item.release_date.slice(-4))])
@@ -181,7 +182,6 @@ const Products = () => {
   };
 
   const addProductToBasket = (id) => {
-    console.log(id);
     setProductsPriceInBasket((prev) => (prev += data[id].price));
     setProductsInBasket((prev) => [...prev, data[id]]);
   };
@@ -191,8 +191,6 @@ const Products = () => {
       [...productsInBasket].filter((product, index) => index !== id)
     );
   };
-
-  console.log(productsPriceInBasket);
 
   return (
     <div className="products-wrapper">
@@ -293,8 +291,10 @@ const Products = () => {
             <option selected disabled="disabled" value="">
               Please choose a year of release
             </option>
-            {productYears.map((item) => (
-              <option value={`${item}`}>{item}</option>
+            {productYears.map((item, index) => (
+              <option value={`${item}`} key={index}>
+                {item}
+              </option>
             ))}
           </select>
         </div>

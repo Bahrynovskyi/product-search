@@ -9,8 +9,6 @@ const ProductsInBasket = ({
   productsPriceInBasket,
   removeItemFromBasket,
 }) => {
-  console.log(productsInBasket);
-
   return (
     <div className="products-in-basket">
       <button className="close-the-basket">

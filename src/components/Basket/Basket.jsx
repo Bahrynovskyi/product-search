@@ -4,7 +4,10 @@ import BasketImg from "../../images/shopping-cart.png";
 const Basket = ({ itemsCount, openBasket }) => {
   return (
     <div className="basket-wrapper">
-      <div className="basket-img" onClick={itemsCount > 0 ? openBasket : null}>
+      <div
+        className={itemsCount > 0 ? `basket-img` : `basket-img hidden`}
+        onClick={itemsCount > 0 ? openBasket : null}
+      >
         <img src={BasketImg} alt="basket-img" />
         {itemsCount > 0 && (
           <span

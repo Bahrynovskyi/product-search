@@ -23,3 +23,9 @@
 .basket-amount-more-than-ten-items {
   padding: 8px 10px;
 }
+
+@media (max-width: 1200px) {
+  .basket-img {
+    right: 50vw;
+  }
+}
